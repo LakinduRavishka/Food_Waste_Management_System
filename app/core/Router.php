@@ -17,6 +17,10 @@ final class Router {
       'sales' => SalesController::class,
       'waste' => WasteController::class,
       'reports' => ReportsController::class,
+      'food_items' => FoodItemsController::class,
+      'production' => ProductionController::class,
+      'discounts' => DiscountsController::class,
+      'customer' => CustomerController::class,
     ];
 
     if (!isset($map[$controller])) {

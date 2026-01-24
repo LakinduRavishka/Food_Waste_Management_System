@@ -16,4 +16,14 @@ final class DB {
     self::$pdo = new PDO($dsn, $db['user'], $db['pass'], $options);
     return self::$pdo;
   }
+
+  public static function query(string $sql, array $params = []): array {
+    $stmt = self::pdo()->prepare($sql);
+    $stmt->execute($params);
+    return $stmt->fetchAll();
+  }
+  
+  public static function lastInsertId(): string {
+    return self::pdo()->lastInsertId();
+  }
 }
