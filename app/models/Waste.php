@@ -4,7 +4,7 @@ declare(strict_types=1);
 final class Waste {
   public static function add(array $data): void {
     $stmt = DB::pdo()->prepare("
-      INSERT INTO waste_logs (waste_date, ingredient_id, menu_item_id, waste_type, quantity, cost, note)
+      INSERT INTO waste_logs (waste_date, ingredient_id, food_item_id, waste_type, quantity, cost, note)
       VALUES (?, ?, ?, ?, ?, ?, ?)
     ");
     $stmt->execute([
@@ -20,10 +20,10 @@ final class Waste {
 
   public static function recent(int $limit=50): array {
     $stmt = DB::pdo()->prepare("
-      SELECT w.*, i.name AS ingredient_name, m.name AS menu_item_name
+      SELECT w.*, i.name AS ingredient_name, f.name AS menu_item_name
       FROM waste_logs w
       LEFT JOIN ingredients i ON i.id=w.ingredient_id
-      LEFT JOIN menu_items m ON m.id=w.menu_item_id
+      LEFT JOIN food_items f ON f.id=w.food_item_id
       ORDER BY w.waste_date DESC, w.id DESC
       LIMIT ?
     ");
@@ -47,11 +47,11 @@ final class Waste {
 
   public static function totalsByMenuItem(string $from, string $to): array {
     $stmt = DB::pdo()->prepare("
-      SELECT m.name, SUM(w.quantity) AS qty, SUM(w.cost) AS cost
+      SELECT f.name, SUM(w.quantity) AS qty, SUM(w.cost) AS cost
       FROM waste_logs w
-      JOIN menu_items m ON m.id=w.menu_item_id
-      WHERE w.menu_item_id IS NOT NULL AND w.waste_date BETWEEN ? AND ?
-      GROUP BY m.id
+      JOIN food_items f ON f.id=w.food_item_id
+      WHERE w.food_item_id IS NOT NULL AND w.waste_date BETWEEN ? AND ?
+      GROUP BY f.id
       ORDER BY cost DESC
     ");
     $stmt->execute([$from, $to]);

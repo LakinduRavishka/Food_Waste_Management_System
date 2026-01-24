@@ -20,7 +20,7 @@
   </div>
   <div class="kpi">
     <div class="kpi__label">Avg Selling Price</div>
-    <div class="kpi__value">$<?= count($items) > 0 ? number_format(array_sum(array_column($items, 'selling_price')) / count($items), 2) : '0.00' ?></div>
+    <div class="kpi__value">Rs.<?= count($items) > 0 ? number_format(array_sum(array_column($items, 'selling_price')) / count($items), 2) : '0.00' ?></div>
   </div>
   <div class="kpi">
     <div class="kpi__label">Profit Margin</div>
@@ -71,15 +71,15 @@
               <span class="pill"><?= htmlspecialchars($item['category']) ?></span>
             </td>
             <td>
-              <span class="font-mono">$<?= number_format($item['cost_price'], 2) ?></span>
+              <span class="font-mono">Rs.<?= number_format($item['cost_price'], 2) ?></span>
             </td>
             <td>
-              <span class="font-mono text-lg">$<?= number_format($item['selling_price'], 2) ?></span>
+              <span class="font-mono text-lg">Rs.<?= number_format($item['selling_price'], 2) ?></span>
             </td>
             <td>
               <div>
                 <span class="font-mono <?= $profit > 0 ? 'text-success' : 'text-danger' ?>">
-                  $<?= number_format($profit, 2) ?>
+                  Rs.<?= number_format($profit, 2) ?>
                 </span>
                 <br><small class="text-muted"><?= number_format($profit_margin, 1) ?>%</small>
               </div>

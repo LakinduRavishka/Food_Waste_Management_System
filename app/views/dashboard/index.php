@@ -39,7 +39,7 @@ $values = array_map(fn($r) => (float)$r['revenue'], $salesByDate);
   </div>
   <div class="kpi">
     <div class="kpi__label">Sales (7 days)</div>
-    <div class="kpi__value">$<?= number_format($salesTotal, 2) ?></div>
+    <div class="kpi__value">Rs.<?= number_format($salesTotal, 2) ?></div>
     <div class="kpi__change kpi__change--positive">↑ Revenue</div>
   </div>
 </div>
@@ -64,7 +64,7 @@ $values = array_map(fn($r) => (float)$r['revenue'], $salesByDate);
     
     <div class="flex flex--between text-muted" style="font-size: 0.75rem; margin-top: 1rem;">
       <span>Period: <?= htmlspecialchars($from) ?> to <?= htmlspecialchars($to) ?></span>
-      <span>Average: $<?= count($values) > 0 ? number_format(array_sum($values) / count($values), 2) : '0.00' ?></span>
+      <span>Average: Rs.<?= count($values) > 0 ? number_format(array_sum($values) / count($values), 2) : '0.00' ?></span>
     </div>
   </section>
 

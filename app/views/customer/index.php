@@ -1,27 +1,49 @@
 <?php if (!isset($_GET['page']) || $_GET['page'] === 'menu'): ?>
-  <!-- Hero Section -->
-  <div style="background: rgba(0,0,0,0.7); border-radius: 1rem; padding: 3rem; margin-bottom: 3rem; box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1); border: 1px solid rgba(255,255,255,0.1);">
-    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center;">
-      <div>
-        <h1 style="font-size: 3rem; margin-bottom: 1rem; color: #ff6b6b;">🍽️ Welcome to Our Restaurant</h1>
-        <p style="font-size: 1.25rem; color: rgba(255,255,255,0.9); line-height: 1.8; margin-bottom: 1.5rem;">
-          Experience the finest cuisine with fresh ingredients and authentic flavors. We serve delicious food made with love and passion.
-        </p>
-        <p style="font-size: 1rem; color: rgba(255,255,255,0.7); margin-bottom: 2rem;">
-          ✅ Fresh ingredients daily<br>
-          ✅ Special discounts available<br>
-          ✅ Fast and friendly service<br>
-          ✅ Dine-in and takeaway options
-        </p>
-        <a href="index.php?r=customer/index&page=discounts" style="display: inline-block; padding: 1rem 2rem; background: linear-gradient(135deg, #ff6b6b, #ee5a24); color: white; border-radius: 0.5rem; font-weight: 700; text-decoration: none; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
-          🔥 View Special Offers
-        </a>
+<!-- Hero Section -->
+<div style="background: linear-gradient(135deg, rgba(0,0,0,0.8), rgba(139,69,19,0.3)); border-radius: 1rem; padding: 3rem; margin-bottom: 3rem; box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.3); border: 1px solid rgba(255,255,255,0.1); overflow: hidden;">
+  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center;">
+    <div style="z-index: 2;">
+      <h1 style="font-size: 3.5rem; margin-bottom: 1.5rem; background: linear-gradient(135deg, #ff6b6b, #ffd93d); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; font-weight: 800; line-height: 1.2;">
+        Freshly Baked Daily
+      </h1>
+      <p style="font-size: 1.3rem; color: rgba(255,255,255,0.95); line-height: 1.8; margin-bottom: 2rem; font-weight: 300;">
+        Indulge in our artisan breads, pastries, and desserts crafted with premium ingredients and traditional recipes.
+      </p>
+      
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 2.5rem;">
+        <div style="display: flex; align-items: center; gap: 0.5rem;">
+          <span style="color: #ffd93d; font-size: 1.5rem;">✓</span>
+          <span style="color: rgba(255,255,255,0.9);">Fresh Daily</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 0.5rem;">
+          <span style="color: #ffd93d; font-size: 1.5rem;">✓</span>
+          <span style="color: rgba(255,255,255,0.9);">Special Offers</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 0.5rem;">
+          <span style="color: #ffd93d; font-size: 1.5rem;">✓</span>
+          <span style="color: rgba(255,255,255,0.9);">Quick Service</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 0.5rem;">
+          <span style="color: #ffd93d; font-size: 1.5rem;">✓</span>
+          <span style="color: rgba(255,255,255,0.9);">Dine-in & Takeaway</span>
+        </div>
       </div>
-      <div style="text-align: center;">
-        <div style="font-size: 15rem; line-height: 1;">🍴</div>
+      
+      <a href="index.php?r=customer/index&page=discounts" style="display: inline-block; padding: 1.2rem 2.5rem; background: linear-gradient(135deg, #ff6b6b, #ee5a24); color: white; border-radius: 50px; font-weight: 700; text-decoration: none; box-shadow: 0 8px 15px rgba(255,107,107,0.4); transition: all 0.3s ease; font-size: 1.1rem;">
+        🔥 View Special Offers
+      </a>
+    </div>
+    
+    <div style="position: relative; height: 400px; border-radius: 1rem; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.5);">
+      <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?w=800&q=80" 
+           alt="Fresh Bakery Products" 
+           style="width: 100%; height: 100%; object-fit: cover; border-radius: 1rem;">
+      <div style="position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(to top, rgba(0,0,0,0.8), transparent); padding: 2rem; color: white;">
+        <p style="font-size: 1.2rem; font-weight: 600; margin: 0;">Artisan Bakery Since 1995</p>
       </div>
     </div>
   </div>
+</div>
 
   <!-- Our Menu Page -->
   <div style="margin-bottom: 3rem;">
@@ -48,14 +70,14 @@
             <div style="margin-top: 1rem;">
               <?php if ($has_discount): ?>
                 <div style="font-size: 1.5rem; font-weight: 700; color: #ff6b6b;">
-                  $<?= number_format($display_price, 2) ?>
+                  Rs.<?= number_format($display_price, 2) ?>
                 </div>
                 <div style="font-size: 1rem; color: rgba(255,255,255,0.6);">
-                  <strike>$<?= number_format($food['selling_price'], 2) ?></strike>
+                  <strike>Rs.<?= number_format($food['selling_price'], 2) ?></strike>
                 </div>
               <?php else: ?>
                 <div style="font-size: 1.5rem; font-weight: 700; color: #ffeb3b;">
-                  $<?= number_format($display_price, 2) ?>
+                  Rs.<?= number_format($display_price, 2) ?>
                 </div>
               <?php endif; ?>
             </div>
@@ -105,12 +127,12 @@
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
               <div>
                 <div style="font-size: 1.5rem; font-weight: 600; color: white;">
-                  $<?= number_format($discounted_price, 2) ?>
+                  Rs.<?= number_format($discounted_price, 2) ?>
                 </div>
                 <div style="font-size: 1rem; opacity: 0.8;">
-                  <strike>$<?= number_format($original_price, 2) ?></strike>
+                  <strike>Rs.<?= number_format($original_price, 2) ?></strike>
                   <span style="color: #ffeb3b; font-weight: 600; margin-left: 0.5rem;">
-                    Save $<?= number_format($savings, 2) ?>
+                    Save Rs.<?= number_format($savings, 2) ?>
                   </span>
                 </div>
               </div>

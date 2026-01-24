@@ -37,8 +37,8 @@
           <div class="text-right">
             <div class="text-lg font-weight-600 text-warning"><?= $suggestion['suggested_discount'] ?>% OFF</div>
             <div class="text-sm text-muted">
-              <strike>$<?= number_format($suggestion['original_price'], 2) ?></strike>
-              → $<?= number_format($suggestion['discounted_price'], 2) ?>
+              <strike>Rs.<?= number_format($suggestion['original_price'], 2) ?></strike>
+              → Rs.<?= number_format($suggestion['discounted_price'], 2) ?>
             </div>
           </div>
         </div>
@@ -100,14 +100,14 @@
                 <span>🍽️</span>
                 <div>
                   <strong><?= htmlspecialchars($discount['food_name']) ?></strong>
-                  <br><small class="text-muted">$<?= number_format($discount['selling_price'], 2) ?> original</small>
+                  <br><small class="text-muted">Rs.<?= number_format($discount['selling_price'], 2) ?> original</small>
                 </div>
               </div>
             </td>
             <td>
               <div class="text-center">
                 <div class="text-lg font-weight-600 text-warning"><?= $discount['discount_percentage'] ?>% OFF</div>
-                <div class="text-sm text-success">$<?= number_format($discount['selling_price'] * (1 - $discount['discount_percentage']/100), 2) ?></div>
+                <div class="text-sm text-success">Rs.<?= number_format($discount['selling_price'] * (1 - $discount['discount_percentage']/100), 2) ?></div>
               </div>
             </td>
             <td>

@@ -206,7 +206,7 @@ a:hover {
 }
 
 .sidebar__link:hover {
-  background: var(--gray-50);
+  background: rgba(255, 107, 107, 0.1);
   color: var(--text-primary);
   text-decoration: none;
   border-left-color: var(--primary-light);
@@ -421,6 +421,7 @@ a:hover {
 .card:hover {
   box-shadow: var(--shadow-md);
   transform: translateY(-2px);
+  background: rgba(255, 107, 107, 0.02);
 }
 
 .card__header {
@@ -541,7 +542,7 @@ a:hover {
 }
 
 .btn--ghost:hover {
-  background: var(--gray-100);
+  background: rgba(255, 107, 107, 0.1);
   color: var(--text-primary);
 }
 
@@ -624,7 +625,7 @@ input::placeholder {
 }
 
 .table th {
-  background: var(--gray-50);
+  background: rgba(255, 107, 107, 0.05);
   padding: var(--space-md) var(--space-lg);
   text-align: left;
   font-weight: 600;
@@ -642,7 +643,7 @@ input::placeholder {
 }
 
 .table tbody tr:hover {
-  background: var(--gray-50);
+  background: rgba(255, 107, 107, 0.1);
 }
 
 .table tbody tr:last-child td {

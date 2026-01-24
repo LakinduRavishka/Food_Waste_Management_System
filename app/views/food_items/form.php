@@ -53,7 +53,7 @@
       
       <div class="form__row">
         <div class="form__group">
-          <label for="cost_price">Cost Price ($)</label>
+          <label for="cost_price">Cost Price (Rs.)</label>
           <input type="number" 
                  id="cost_price" 
                  name="cost_price" 
@@ -65,7 +65,7 @@
         </div>
         
         <div class="form__group">
-          <label for="selling_price">Selling Price ($)</label>
+          <label for="selling_price">Selling Price (Rs.)</label>
           <input type="number" 
                  id="selling_price" 
                  name="selling_price" 
@@ -130,7 +130,7 @@ function updateProfitCalculator() {
   const profit = sellingPrice - costPrice;
   const margin = sellingPrice > 0 ? (profit / sellingPrice) * 100 : 0;
   
-  document.getElementById('profit-amount').textContent = '$' + profit.toFixed(2);
+  document.getElementById('profit-amount').textContent = 'Rs.' + profit.toFixed(2);
   document.getElementById('profit-margin').textContent = margin.toFixed(1) + '%';
   
   // Color coding

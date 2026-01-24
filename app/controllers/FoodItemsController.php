@@ -8,6 +8,7 @@ class FoodItemsController extends Controller {
     }
     
     public function create() {
+        $error = '';
         if ($_POST) {
             $name = trim($_POST['name'] ?? '');
             $category = trim($_POST['category'] ?? '');
@@ -31,6 +32,7 @@ class FoodItemsController extends Controller {
     public function edit() {
         $id = (int)($_GET['id'] ?? 0);
         $item = DB::query("SELECT * FROM food_items WHERE id = ?", [$id])[0] ?? null;
+        $error = '';
         
         if (!$item) {
             header('Location: index.php?r=food_items/index');

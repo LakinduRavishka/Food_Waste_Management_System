@@ -12,7 +12,7 @@ $currentRoute = $_GET['r'] ?? 'dashboard/index';
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/styles.css">
+  <link rel="stylesheet" href="assets/css/styles.css?v=5">
   <meta name="description" content="Professional food waste management and profit optimization system">
   <meta name="theme-color" content="#6366f1">
 </head>
