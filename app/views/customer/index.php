@@ -100,7 +100,12 @@
   <!-- Special Discounts Page -->
   <?php if (!empty($discounts)): ?>
     <div style="margin-bottom: 3rem;">
-      <h2 style="color: white; text-align: center; margin-bottom: 2rem; font-size: 2rem;">🔥 Special Discounts Today!</h2>
+      <div style="text-align: center; margin-bottom: 3rem;">
+        <h2 style="color: white; margin-bottom: 0.5rem; font-size: 3rem; font-weight: 800; background: linear-gradient(135deg, #ff6b6b, #ffd93d); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+          🔥 Today's Hot Deals
+        </h2>
+        <p style="color: rgba(255,255,255,0.7); font-size: 1.2rem;">Limited time offers - Grab them before they're gone!</p>
+      </div>
       
       <div class="grid grid--2" style="gap: 2rem;">
         <?php foreach ($discounts as $discount): 
@@ -108,48 +113,91 @@
           $discounted_price = $original_price * (1 - $discount['discount_percentage']/100);
           $savings = $original_price - $discounted_price;
         ?>
-          <div class="card" style="background: linear-gradient(135deg, #ff6b6b, #ee5a24); color: white; padding: 2rem;">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
-              <div>
-                <h3 style="color: white; margin-bottom: 0.5rem;"><?= htmlspecialchars($discount['name']) ?></h3>
-                <span style="background: rgba(255,255,255,0.2); color: white; padding: 0.25rem 0.75rem; border-radius: 999px; font-size: 0.875rem;">
+          <div class="card" style="position: relative; background: linear-gradient(135deg, rgba(30,30,30,0.95), rgba(50,50,50,0.95)); border-radius: 1.5rem; overflow: hidden; border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 20px 40px rgba(0,0,0,0.5); transition: transform 0.3s ease;">
+            
+            <!-- Discount Badge -->
+            <div style="position: absolute; top: 1.5rem; right: 1.5rem; z-index: 10;">
+              <div style="background: linear-gradient(135deg, #ff6b6b, #ee5a24); padding: 1rem 1.5rem; border-radius: 1rem; box-shadow: 0 8px 20px rgba(255,107,107,0.4); transform: rotate(3deg);">
+                <div style="font-size: 2.5rem; font-weight: 900; color: white; line-height: 1; text-shadow: 2px 2px 4px rgba(0,0,0,0.3);">
+                  <?= $discount['discount_percentage'] ?>%
+                </div>
+                <div style="font-size: 0.875rem; color: white; font-weight: 700; text-align: center; margin-top: 0.25rem;">OFF</div>
+              </div>
+            </div>
+            
+            <!-- Background Pattern -->
+            <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; opacity: 0.03; background-image: radial-gradient(circle, white 1px, transparent 1px); background-size: 20px 20px;"></div>
+            
+            <!-- Image Section -->
+            <div style="position: relative; height: 200px; background: linear-gradient(135deg, rgba(255,107,107,0.2), rgba(255,217,61,0.2)); overflow: hidden;">
+              <img src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=600&q=80" 
+                   alt="Discount Product" 
+                   style="width: 100%; height: 100%; object-fit: cover; opacity: 0.7;">
+              <div style="position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(to top, rgba(0,0,0,0.8), transparent); padding: 1.5rem;">
+                <span style="background: rgba(255,107,107,0.9); color: white; padding: 0.4rem 1rem; border-radius: 50px; font-size: 0.875rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;">
                   <?= htmlspecialchars($discount['category']) ?>
                 </span>
               </div>
-              <div style="text-align: right;">
-                <div style="font-size: 2.5rem; font-weight: 700; color: #ffeb3b;">
-                  <?= $discount['discount_percentage'] ?>%
-                </div>
-                <div style="font-size: 0.875rem; opacity: 0.9;">OFF</div>
-              </div>
             </div>
             
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
-              <div>
-                <div style="font-size: 1.5rem; font-weight: 600; color: white;">
-                  Rs.<?= number_format($discounted_price, 2) ?>
-                </div>
-                <div style="font-size: 1rem; opacity: 0.8;">
-                  <strike>Rs.<?= number_format($original_price, 2) ?></strike>
-                  <span style="color: #ffeb3b; font-weight: 600; margin-left: 0.5rem;">
-                    Save Rs.<?= number_format($savings, 2) ?>
-                  </span>
+            <!-- Content Section -->
+            <div style="padding: 2rem; position: relative; z-index: 2;">
+              <h3 style="color: white; margin-bottom: 1.5rem; font-size: 1.75rem; font-weight: 700;">
+                <?= htmlspecialchars($discount['name']) ?>
+              </h3>
+              
+              <!-- Price Section -->
+              <div style="background: rgba(255,255,255,0.05); padding: 1.5rem; border-radius: 1rem; margin-bottom: 1.5rem; border: 1px solid rgba(255,255,255,0.1);">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                  <div>
+                    <div style="font-size: 0.875rem; color: rgba(255,255,255,0.6); margin-bottom: 0.25rem; text-transform: uppercase; letter-spacing: 1px;">
+                      Sale Price
+                    </div>
+                    <div style="font-size: 2.5rem; font-weight: 900; background: linear-gradient(135deg, #ffd93d, #ff6b6b); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; line-height: 1;">
+                      Rs.<?= number_format($discounted_price, 2) ?>
+                    </div>
+                  </div>
+                  <div style="text-align: right;">
+                    <div style="font-size: 1.125rem; color: rgba(255,255,255,0.5); text-decoration: line-through; margin-bottom: 0.25rem;">
+                      Rs.<?= number_format($original_price, 2) ?>
+                    </div>
+                    <div style="background: linear-gradient(135deg, #06D6A0, #00C9A7); color: white; padding: 0.4rem 1rem; border-radius: 50px; font-size: 0.875rem; font-weight: 700; display: inline-block;">
+                      Save Rs.<?= number_format($savings, 2) ?>
+                    </div>
+                  </div>
                 </div>
               </div>
-              <div style="text-align: right;">
-                <div style="font-size: 0.875rem; opacity: 0.9;">Until</div>
-                <div style="font-size: 1.25rem; font-weight: 600; color: #ffeb3b;">
-                  <?= date('g:i A', strtotime($discount['end_time'])) ?>
+              
+              <!-- Time and Stock Section -->
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                <div style="background: linear-gradient(135deg, rgba(255,107,107,0.15), rgba(238,90,36,0.15)); padding: 1.25rem; border-radius: 1rem; border: 1px solid rgba(255,107,107,0.3);">
+                  <div style="display: flex; align-items: center; gap: 0.75rem;">
+                    <span style="font-size: 1.75rem;">⏰</span>
+                    <div>
+                      <div style="font-size: 0.75rem; color: rgba(255,255,255,0.6); margin-bottom: 0.25rem; text-transform: uppercase;">Ends At</div>
+                      <div style="font-size: 1.25rem; font-weight: 700; color: #ffd93d;">
+                        <?= date('g:i A', strtotime($discount['end_time'])) ?>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                <div style="background: linear-gradient(135deg, rgba(255,217,61,0.15), rgba(255,166,43,0.15)); padding: 1.25rem; border-radius: 1rem; border: 1px solid rgba(255,217,61,0.3);">
+                  <div style="display: flex; align-items: center; gap: 0.75rem;">
+                    <span style="font-size: 1.75rem;">📦</span>
+                    <div>
+                      <div style="font-size: 0.75rem; color: rgba(255,255,255,0.6); margin-bottom: 0.25rem; text-transform: uppercase;">In Stock</div>
+                      <div style="font-size: 1.25rem; font-weight: 700; color: #ffd93d;">
+                        <?= $discount['leftover_quantity'] ?> Left
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
-            
-            <div style="background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 0.5rem;">
-              <div style="display: flex; justify-content: space-between; align-items: center;">
-                <span style="font-size: 0.875rem; opacity: 0.9;">⏰ Limited Time</span>
-                <span style="font-size: 0.875rem; font-weight: 600; color: #ffeb3b;">
-                  <?= $discount['leftover_quantity'] ?> left
-                </span>
+              
+              <!-- Progress Bar for Stock -->
+              <div style="margin-top: 1rem; background: rgba(255,255,255,0.1); height: 8px; border-radius: 50px; overflow: hidden;">
+                <div style="height: 100%; background: linear-gradient(90deg, #ff6b6b, #ffd93d); width: <?= min(100, ($discount['leftover_quantity'] / 100) * 100) ?>%; border-radius: 50px; transition: width 0.3s ease;"></div>
               </div>
             </div>
           </div>
@@ -157,13 +205,27 @@
       </div>
     </div>
   <?php else: ?>
-    <div style="background: rgba(255,255,255,0.95); padding: 4rem; border-radius: 1rem; text-align: center;">
-      <div style="font-size: 4rem; margin-bottom: 2rem;">🍽️</div>
-      <h2 style="color: var(--text-primary); margin-bottom: 1rem;">No Special Offers Right Now</h2>
-      <p style="color: var(--text-secondary); font-size: 1.125rem;">Check back later for amazing discounts!</p>
+    <div style="background: linear-gradient(135deg, rgba(30,30,30,0.95), rgba(50,50,50,0.95)); padding: 5rem 4rem; border-radius: 2rem; text-align: center; border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 20px 40px rgba(0,0,0,0.5);">
+      <div style="margin-bottom: 2rem; position: relative; display: inline-block;">
+        <div style="font-size: 8rem; filter: grayscale(1); opacity: 0.3;">🍽️</div>
+        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(255,107,107,0.2); width: 150px; height: 150px; border-radius: 50%; filter: blur(30px);"></div>
+      </div>
+      <h2 style="color: white; margin-bottom: 1rem; font-size: 2.5rem; font-weight: 800;">No Active Deals Right Now</h2>
+      <p style="color: rgba(255,255,255,0.6); font-size: 1.25rem; max-width: 500px; margin: 0 auto; line-height: 1.8;">
+        Don't worry! Amazing discounts are coming soon. Check back later for exclusive offers!
+      </p>
+      <div style="margin-top: 2rem; display: inline-block; padding: 1rem 2rem; background: rgba(255,255,255,0.1); border-radius: 50px; border: 1px solid rgba(255,255,255,0.2);">
+        <span style="color: rgba(255,255,255,0.8); font-size: 0.95rem;">💡 Pro tip: Subscribe to get notified about new deals!</span>
+      </div>
     </div>
   <?php endif; ?>
 <?php endif; ?>
+
+<style>
+.card:hover {
+  transform: translateY(-10px);
+}
+</style>
 
 <!-- Email Subscription -->
 <div style="background: rgba(255,255,255,0.95); padding: 2rem; border-radius: 1rem; margin-top: 3rem; box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1);">
