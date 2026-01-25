@@ -112,7 +112,7 @@
               </div>
             </td>
             <td>
-              <span class="font-mono text-success">$<?= number_format($revenue, 2) ?></span>
+              <span class="font-mono text-success">Rs.<?= number_format($revenue, 2) ?></span>
             </td>
             <td>
               <?php if ($prod['quantity_leftover'] > 0): ?>

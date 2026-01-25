@@ -101,7 +101,7 @@
     <div id="profit-calculator">
       <div class="kpi">
         <div class="kpi__label">Profit per Item</div>
-        <div class="kpi__value" id="profit-amount">$0.00</div>
+        <div class="kpi__value" id="profit-amount">Rs.0.00</div>
       </div>
       <div class="kpi">
         <div class="kpi__label">Profit Margin</div>

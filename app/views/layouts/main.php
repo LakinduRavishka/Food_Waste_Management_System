@@ -67,9 +67,9 @@ $currentRoute = $_GET['r'] ?? 'dashboard/index';
   <div class="main-content">
     <header class="topbar">
       <div class="topbar__content">
-        <button class="sidebar-toggle" onclick="toggleSidebar()">
+        <!-- <button class="sidebar-toggle" onclick="toggleSidebar()">
           <span></span><span></span><span></span>
-        </button>
+        </button> -->
         <div class="topbar__actions">
           <span class="topbar__time"><?= date('M j, Y g:i A') ?></span>
         </div>
