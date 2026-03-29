@@ -32,6 +32,7 @@ $currentRoute = $_GET['r'] ?? 'dashboard/index';
         ['route' => 'food_items/index', 'label' => 'Food Items', 'icon' => '🍽️'],
         ['route' => 'production/index', 'label' => 'Production', 'icon' => '📈'],
         ['route' => 'discounts/index', 'label' => 'Discounts', 'icon' => '💸'],
+        ['route' => 'orders/index', 'label' => 'Orders', 'icon' => '📦'],
         ['route' => 'ingredients/index', 'label' => 'Ingredients', 'icon' => '🥬'],
         ['route' => 'inventory/index', 'label' => 'Inventory', 'icon' => '📦'],
         ['route' => 'sales/index', 'label' => 'Sales', 'icon' => '💰'],
@@ -39,12 +40,12 @@ $currentRoute = $_GET['r'] ?? 'dashboard/index';
         ['route' => 'reports/index', 'label' => 'Reports', 'icon' => '📋']
       ];
       
-      foreach ($navItems as $item): 
-        $isActive = strpos($currentRoute, explode('/', $item['route'])[0]) === 0;
+      foreach ($navItems as $navItem): 
+        $isActive = strpos($currentRoute, explode('/', $navItem['route'])[0]) === 0;
       ?>
-        <a href="index.php?r=<?= $item['route'] ?>" class="sidebar__link <?= $isActive ? 'active' : '' ?>">
-          <span class="sidebar__icon"><?= $item['icon'] ?></span>
-          <span class="sidebar__text"><?= $item['label'] ?></span>
+        <a href="index.php?r=<?= $navItem['route'] ?>" class="sidebar__link <?= $isActive ? 'active' : '' ?>">
+          <span class="sidebar__icon"><?= $navItem['icon'] ?></span>
+          <span class="sidebar__text"><?= $navItem['label'] ?></span>
         </a>
       <?php endforeach; ?>
     </nav>

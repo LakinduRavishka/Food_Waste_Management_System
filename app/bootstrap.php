@@ -46,3 +46,4 @@ require __DIR__ . '/controllers/FoodItemsController.php';
 require __DIR__ . '/controllers/ProductionController.php';
 require __DIR__ . '/controllers/DiscountsController.php';
 require __DIR__ . '/controllers/CustomerController.php';
+require __DIR__ . '/controllers/OrdersController.php';

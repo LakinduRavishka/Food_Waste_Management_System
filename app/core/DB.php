@@ -27,3 +27,4 @@ final class DB {
     return self::pdo()->lastInsertId();
   }
 }
+// this has on db connection

@@ -1,6 +1,6 @@
 <?php
 declare(strict_types=1);
-
+// change food_item_id to menu_item_id
 final class Sale {
   public static function add(array $data): void {
     $stmt = DB::pdo()->prepare("

@@ -86,6 +86,10 @@
               <div style="margin-top: 1rem; padding: 0.5rem; background: rgba(16,185,129,0.2); color: #10b981; border-radius: 0.5rem; font-size: 0.875rem; border: 1px solid rgba(16,185,129,0.3);">
                 ✅ Available: <?= $food['available_qty'] ?> items
               </div>
+              <button onclick="addToCart(<?= $food['id'] ?>, '<?= htmlspecialchars($food['name'], ENT_QUOTES) ?>', <?= $food['selling_price'] ?>, <?= $food['discount_percentage'] ?? 0 ?>)" 
+                      style="width: 100%; margin-top: 1rem; padding: 0.75rem; background: linear-gradient(135deg, #ff6b6b, #ee5a24); color: white; border: none; border-radius: 0.5rem; font-weight: 700; cursor: pointer; font-size: 1rem; transition: all 0.3s;">
+                🛒 Add to Cart
+              </button>
             <?php else: ?>
               <div style="margin-top: 1rem; padding: 0.5rem; background: rgba(239,68,68,0.2); color: #ef4444; border-radius: 0.5rem; font-size: 0.875rem; border: 1px solid rgba(239,68,68,0.3);">
                 ⏳ Check back later
@@ -219,6 +223,97 @@
       </div>
     </div>
   <?php endif; ?>
+<?php endif; ?>
+
+<?php if (isset($_GET['page']) && $_GET['page'] === 'cart'): ?>
+  <!-- Shopping Cart Page -->
+  <div id="cart-view">
+    <div style="background: rgba(0,0,0,0.7); padding: 2rem; border-radius: 1rem; margin-bottom: 2rem;">
+      <h2 style="color: white; margin-bottom: 1.5rem; font-size: 2rem;">🛒 Your Shopping Cart</h2>
+      <div id="cart-items"></div>
+      
+      <div style="background: rgba(255,255,255,0.1); padding: 1.5rem; border-radius: 1rem; margin-top: 2rem; border: 2px solid rgba(255,255,255,0.2);">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+          <span style="color: white; font-size: 1.5rem; font-weight: 700;">Total:</span>
+          <span id="cart-total" style="color: #ffd93d; font-size: 2rem; font-weight: 900;">Rs.0.00</span>
+        </div>
+        <div style="display: flex; gap: 1rem;">
+          <button onclick="showCheckoutForm()" style="flex: 1; padding: 1rem; background: linear-gradient(135deg, #10b981, #059669); color: white; border: none; border-radius: 0.5rem; font-weight: 700; cursor: pointer; font-size: 1.1rem;">
+            ✅ Proceed to Checkout
+          </button>
+          <button onclick="clearCart()" style="padding: 1rem 2rem; background: rgba(239,68,68,0.2); color: #ef4444; border: 1px solid #ef4444; border-radius: 0.5rem; font-weight: 700; cursor: pointer;">
+            🗑️ Clear Cart
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Checkout Form -->
+  <div id="checkout-form" style="display: none;">
+    <div style="background: rgba(0,0,0,0.7); padding: 2rem; border-radius: 1rem;">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+        <h2 style="color: white; margin: 0; font-size: 2rem;">📋 Checkout</h2>
+        <button onclick="showCart()" style="background: rgba(255,255,255,0.1); color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 0.5rem; cursor: pointer; font-weight: 600;">
+          ← Back to Cart
+        </button>
+      </div>
+      
+      <form onsubmit="placeOrder(event)" style="max-width: 600px;">
+        <input type="hidden" name="csrf" value="<?= htmlspecialchars(CSRF::token()) ?>">
+        
+        <div style="margin-bottom: 1.5rem;">
+          <label style="color: white; display: block; margin-bottom: 0.5rem; font-weight: 600;">Full Name *</label>
+          <input type="text" name="customer_name" required 
+                 style="width: 100%; padding: 0.75rem; border: 2px solid rgba(255,255,255,0.2); border-radius: 0.5rem; background: rgba(255,255,255,0.1); color: white; font-size: 1rem;" 
+                 placeholder="John Doe">
+        </div>
+        
+        <div style="margin-bottom: 1.5rem;">
+          <label style="color: white; display: block; margin-bottom: 0.5rem; font-weight: 600;">Email *</label>
+          <input type="email" name="customer_email" required 
+                 style="width: 100%; padding: 0.75rem; border: 2px solid rgba(255,255,255,0.2); border-radius: 0.5rem; background: rgba(255,255,255,0.1); color: white; font-size: 1rem;" 
+                 placeholder="john@example.com">
+        </div>
+        
+        <div style="margin-bottom: 1.5rem;">
+          <label style="color: white; display: block; margin-bottom: 0.5rem; font-weight: 600;">Phone Number *</label>
+          <input type="tel" name="customer_phone" required 
+                 style="width: 100%; padding: 0.75rem; border: 2px solid rgba(255,255,255,0.2); border-radius: 0.5rem; background: rgba(255,255,255,0.1); color: white; font-size: 1rem;" 
+                 placeholder="0771234567">
+        </div>
+        
+        <div style="margin-bottom: 1.5rem;">
+          <label style="color: white; display: block; margin-bottom: 0.5rem; font-weight: 600;">Delivery Address *</label>
+          <textarea name="customer_address" required rows="3" 
+                    style="width: 100%; padding: 0.75rem; border: 2px solid rgba(255,255,255,0.2); border-radius: 0.5rem; background: rgba(255,255,255,0.1); color: white; font-size: 1rem; resize: vertical;" 
+                    placeholder="123 Main Street, Colombo"></textarea>
+        </div>
+        
+        <div style="margin-bottom: 1.5rem;">
+          <label style="color: white; display: block; margin-bottom: 0.5rem; font-weight: 600;">Order Notes (Optional)</label>
+          <textarea name="notes" rows="2" 
+                    style="width: 100%; padding: 0.75rem; border: 2px solid rgba(255,255,255,0.2); border-radius: 0.5rem; background: rgba(255,255,255,0.1); color: white; font-size: 1rem; resize: vertical;" 
+                    placeholder="Any special instructions?"></textarea>
+        </div>
+        
+        <div style="background: rgba(255,255,255,0.1); padding: 1.5rem; border-radius: 1rem; margin-bottom: 1.5rem;">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <span style="color: white; font-size: 1.25rem; font-weight: 700;">Order Total:</span>
+            <span id="checkout-total" style="color: #ffd93d; font-size: 1.75rem; font-weight: 900;"></span>
+          </div>
+        </div>
+        
+        <button type="submit" style="width: 100%; padding: 1.25rem; background: linear-gradient(135deg, #10b981, #059669); color: white; border: none; border-radius: 0.5rem; font-weight: 700; cursor: pointer; font-size: 1.2rem;">
+          <span>✅</span> Place Order
+        </button>
+        
+        <p style="color: rgba(255,255,255,0.6); text-align: center; margin-top: 1rem; font-size: 0.875rem;">
+          💵 No payment required. Pay on delivery.
+        </p>
+      </form>
+    </div>
+  </div>
 <?php endif; ?>
 
 <style>

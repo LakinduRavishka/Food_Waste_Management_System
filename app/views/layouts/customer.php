@@ -84,6 +84,7 @@
     <ul>
       <li><a href="index.php?r=customer/index" class="<?= !isset($_GET['page']) || $_GET['page'] === 'menu' ? 'active' : '' ?>">🏠 HOME</a></li>
       <li><a href="index.php?r=customer/index&page=discounts" class="<?= isset($_GET['page']) && $_GET['page'] === 'discounts' ? 'active' : '' ?>">🔥 Special Discounts</a></li>
+      <li><a href="index.php?r=customer/index&page=cart" class="<?= isset($_GET['page']) && $_GET['page'] === 'cart' ? 'active' : '' ?>" id="cart-nav">🛒 Cart <span id="cart-count" style="background: #ff6b6b; color: white; border-radius: 50%; padding: 0.2rem 0.5rem; font-size: 0.8rem; margin-left: 0.5rem; display: none;">0</span></a></li>
     </ul>
   </div>
 
@@ -139,8 +140,12 @@ document.addEventListener('click', function(e) {
 });
 
 setInterval(() => {
-  location.reload();
+  const currentPage = new URLSearchParams(window.location.search).get('page');
+  if (currentPage !== 'cart') {
+    location.reload();
+  }
 }, 30000);
 </script>
+<script src="assets/js/cart.js"></script>
 </body>
 </html>

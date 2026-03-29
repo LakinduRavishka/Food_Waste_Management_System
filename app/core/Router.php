@@ -21,6 +21,7 @@ final class Router {
       'production' => ProductionController::class,
       'discounts' => DiscountsController::class,
       'customer' => CustomerController::class,
+      'orders' => OrdersController::class,
     ];
 
     if (!isset($map[$controller])) {

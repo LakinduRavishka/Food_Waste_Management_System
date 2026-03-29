@@ -31,7 +31,9 @@ class FoodItemsController extends Controller {
     
     public function edit() {
         $id = (int)($_GET['id'] ?? 0);
-        $item = DB::query("SELECT * FROM food_items WHERE id = ?", [$id])[0] ?? null;
+        $results = DB::query("SELECT * FROM food_items WHERE id = ?", [$id]);
+        $item = count($results) > 0 ? $results[0] : null;
+        $allItems = [];
         $error = '';
         
         if (!$item) {
@@ -55,7 +57,7 @@ class FoodItemsController extends Controller {
         }
         
         $mode = 'edit';
-        $this->render('food_items/form', compact('mode', 'item', 'error'));
+        $this->render('food_items/form', compact('mode', 'item', 'allItems', 'error'));
     }
     
     public function delete() {

@@ -62,6 +62,21 @@ class DiscountsController extends Controller {
         return $suggestions;
     }
     
+    public function add() {
+        $error = '';
+        
+        // Get food items with leftover info
+        $foodItems = DB::query("
+            SELECT fi.id, fi.name, fi.selling_price, 
+                   COALESCE(dp.quantity_leftover, 0) as leftover
+            FROM food_items fi
+            LEFT JOIN daily_production dp ON fi.id = dp.food_item_id 
+                AND dp.production_date = CURDATE()
+            ORDER BY fi.name");
+        
+        $this->render('discounts/add', compact('foodItems', 'error'));
+    }
+    
     public function create() {
         if ($_POST) {
             $food_item_id = (int)($_POST['food_item_id'] ?? 0);

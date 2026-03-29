@@ -4,6 +4,9 @@
     <p class="text-muted mb-0">Manage automatic discount suggestions and customer offers</p>
   </div>
   <div class="flex gap-sm">
+    <a class="btn btn--primary" href="index.php?r=discounts/add">
+      <span>➕</span> Create Custom Discount
+    </a>
     <a class="btn btn--outline" href="index.php?r=production/index">
       <span>📊</span> Production
     </a>
